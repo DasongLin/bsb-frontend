@@ -6,8 +6,9 @@ const content = ref('正在加载公司信息…')
 
 onMounted(async () => {
   try {
-    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/about`).then(r => r.json())
-    const json = await res.json()
+    const API     = new URL(import.meta.env.VITE_API_URL)
+    const res     = await fetch(new URL('/api/about', API))
+    const json    = await res.json()
     content.value = json.content
   } catch (err) {
     console.error(err)

@@ -6,8 +6,10 @@ const content = ref('正在加载服务信息…')
 
 onMounted(async () => {
   try {
-    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/services`).then(r => r.json())
-    const json = await res.json()
+    // 统一用 new URL 拼接，自动去重斜杠
+    const API     = new URL(import.meta.env.VITE_API_URL)
+    const res     = await fetch(new URL('/api/services', API))
+    const json    = await res.json()
     content.value = json.content
   } catch (err) {
     console.error(err)
