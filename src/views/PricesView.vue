@@ -6,7 +6,7 @@ const content = ref('正在加载定价信息…')
 
 onMounted(async () => {
   try {
-    const res  = await fetch('http://localhost:8000/api/prices')
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/Prices`).then(r => r.json())
     const json = await res.json()
     content.value = json.content      // 把后端最新的 content 字段赋给页面
   } catch (e) {

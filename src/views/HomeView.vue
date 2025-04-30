@@ -9,7 +9,7 @@ onMounted(() => {
   // 第二步：1 秒后再去调用后端 API
   setTimeout(async () => {
     try {
-      const res = await fetch('http://localhost:8000/api/hello')
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api`).then(r => r.json())
       const data = await res.json()
       msg.value = data.msg   // 显示后端返回
     } catch (err) {
